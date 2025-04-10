@@ -21,6 +21,10 @@ const categorySchema = new mongoose.Schema(
         ref: "Category", // التعديل هنا لجعل المرجع إلى نفس النموذج
       },
     ],
+    icon: {
+      type: String,
+      default: null,
+    },
   },
   {
     timestamps: true,
@@ -35,6 +39,7 @@ const newCatValidator = (obj) => {
   const schema = Joi.object({
     categoryName: Joi.string().trim().required(),
     parentCategory: Joi.string().allow(null),
+    icon: Joi.string().allow(null),
   });
   return schema.validate(obj);
 };

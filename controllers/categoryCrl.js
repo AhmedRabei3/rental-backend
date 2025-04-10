@@ -6,11 +6,14 @@ const { Category, newCatValidator } = require("../models/Category");
  * @route   /api/category
  * @method  POST
  * @access  private (admin)
+ * @param   {categoryName , icon}
  */
 module.exports.createCategory = asyncHandler(async (req, res) => {
   const { error } = newCatValidator(req.body);
   if (error) return res.status(400).json({ message: error.details[0].message });
-  const oldCat = await Category.find({ categoryName: req.body.categoryName });
+  const oldCat = await Category.findOne({
+    categoryName: req.body.categoryName,
+  });
   if (oldCat)
     return res.status(400).json({ message: "this category is exist" });
   const category = await Category.create(req.body);

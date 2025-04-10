@@ -11,7 +11,6 @@ const { addRemoveDate } = require("../utils/addRemoveBlockedDate");
 const { Parser } = require("json2csv");
 const fs = require("fs");
 const path = require("path");
-const { sendWebSocketNotification } = require('../utils/websocket');
 
 /**------------------------------------------
  * @description Get available booking dates

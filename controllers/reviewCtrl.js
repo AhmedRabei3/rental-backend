@@ -163,5 +163,6 @@ module.exports.toggleLikeItem = asyncHandler(async (req, res) => {
   res.status(200).json({
     message: hasLiked ? "Unliked" : "Liked",
     likesCount: updatedItem.likes.length,
+    itemId: item._id,
   });
 });

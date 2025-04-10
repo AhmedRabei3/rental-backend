@@ -61,6 +61,7 @@ module.exports.login = asyncHandler(async (req, res) => {
       id: user._id,
       name: user.name,
       email: user.email,
+      profilePhoto: user.profileImage,
     },
     token: user.generateToken(),
     message: "User logged in successfully",

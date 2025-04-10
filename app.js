@@ -18,6 +18,8 @@ const server = http.createServer(app);
 
 // CORS setup
 app.use(cors());
+app.use(cors({ origin: "*" }));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 

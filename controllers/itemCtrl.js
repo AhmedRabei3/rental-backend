@@ -84,26 +84,31 @@ module.exports.createItem = asyncHandler(async (req, res) => {
 
 /**
  * @description Get all items
- * @route /api/items
+ * @route /api/item
  * @method GET
  * @access public
  */
 module.exports.getItems = asyncHandler(async (req, res) => {
-  const { category, page = "1", limit = "10" } = req.query;
+  const { category, page = "1", limit = "10" , price} = req.query;
   const pageNumber = parseInt(page, 10);
   const limitNumber = parseInt(limit, 10);
   const filter = category ? { category } : {};
   const { items, totalItems } = await Item.getItemsWithDetails(
     filter,
     pageNumber,
-    limitNumber
+    limitNumber,
+    price
   );
-  console.log(items);
+  const ownerData = await Item.populate(items, {
+    path: "owner",
+    select: "averageRating likes name profileImage",
+  });
   res.status(200).json({
     totalItems,
     currentPage: pageNumber,
     totalPages: Math.ceil(totalItems / limitNumber),
     items,
+    ownerData,
   });
 });
 
